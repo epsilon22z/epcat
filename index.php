@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+ * @Author: hongyuan zhang
+ * @Date: April 22 2023 4:47 PM
+ * @ModifyDate: November 11 2023 12:38
+                November 12 2023 15:47
+                December 09 2023 17:12
+                December 27 2023 17:45
+                January  20 2024 18:51
+ * @LastEditTime: January 20 2024 18:51
+ * Copyright (c) 2023 by hongyuan zhang, Liaoning jianzhu Vocational College,All Rights Reserved.
+-->
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>MyBlog</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <!--
+            <script src="/assets/dayjs.min.js"></script>
+            <script src="/assets/plugin/duration.js"></script>
+        -->
+        <style>
+#header{
+#    background-color: #f2ede4;
+    color: black;
+    margin:1px;
+    padding:1px;
+}
+.container {
+    display: flex;
+}
+#nav {
+    background-color: white;
+    text-align: left;
+    height: 300px;
+    width: 100px;
+    padding: 5px;
+}
+#content {
+    flex: 1;
+    padding: 10px;
+}
+#video {
+    display: flex;
+    justify-content: center;
+}
+#footer {
+    /* background-color: aquamarine; */
+    /* background-color: #093f49; */
+    background-color: rgb(4, 63, 71,255);
+    color: white;
+    text-align: center;
+    clear: both;
+    padding: 5px;
+}
+.myButton {
+    width: 100px;
+    height: 30px;
+    background-color: pink;
+}
+        </style>
+    </head>
+<body>
+    <div id="header">
+        <h2 style="font-family:Comic Sans MS;text-align:center">Welcome to MyBlog!</h2>
+        <div id="serverTime" style="display: flex; justify-content: flex-end;">
+            <p id="uptime">
+                <!--
+                    此处借鉴了 https://blog.n0ts.top/75.html
+                -->
+                <span id="sitetime"></span>
+                <script language=javascript>
+                function siteTime(){
+                window.setTimeout("siteTime()", 1000);
+                var seconds = 1000
+                var minutes = seconds * 60
+                var hours = minutes * 60
+                var days = hours * 24
+                var years = days * 365
+                var today = new Date()
+                var todayYear = today.getFullYear()
+                var todayMonth = today.getMonth()
+                var todayDate = today.getDate()
+                var todayHour = today.getHours()
+                var todayMinute = today.getMinutes()
+                var todaySecond = today.getSeconds()
+                /* Date.UTC() -- 返回date对象距世界标准时间(UTC)1970年1月1日午夜之间的毫秒数(时间戳)
+                year - 作为date对象的年份，为4位年份值
+                month - 0-11之间的整数，做为date对象的月份
+                day - 1-31之间的整数，做为date对象的天数
+                hours - 0(午夜24点)-23之间的整数，做为date对象的小时数
+                minutes - 0-59之间的整数，做为date对象的分钟数
+                seconds - 0-59之间的整数，做为date对象的秒数
+                microseconds - 0-999之间的整数，做为date对象的毫秒数 */
+                var t1 = Date.UTC(2023,3,22,16,47,00)
+                var t2 = Date.UTC(todayYear,todayMonth,todayDate,todayHour,todayMinute,todaySecond)
+                var diff = t2-t1
+                var diffYears = Math.floor(diff/years)
+                var diffDays = Math.floor((diff/days)-diffYears*365)
+                var diffHours = Math.floor((diff-(diffYears*365+diffDays)*days)/hours)
+                var diffMinutes = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours)/minutes)
+                var diffSeconds = Math.floor((diff-(diffYears*365+diffDays)*days-diffHours*hours-diffMinutes*minutes)/seconds)
+                //document.getElementById("sitetime").innerHTML=" 已运行"+diffYears+" 年 "+diffDays+" 天 "+diffHours+" 小时 "+diffMinutes+" 分钟 "+diffSeconds+" 秒"
+                document.getElementById("sitetime").innerHTML=" It has been run "+diffYears+" years "+diffDays+" days "+diffHours+" hours "+diffMinutes+" minutes "+diffSeconds+" seconds "
+                }
+                siteTime()
+            </script></p>
+        </div>
+    </div>
+    <div class="container">
+        <div id="nav">
+            <p><a href="/redirect.php?keyword=index"><button class="myButton">Home</button></a></p>
+            <p><a href="/redirect.php?keyword=downloads" target="_blank"><button class="myButton">Downloads</button></a></p>
+        <!--
+            <p><a href="/redirect.php?keyword=media" target="_blank"><button class="myButton">Media</button></a></p>
+        -->
+            <p><a href="/redirect.php?keyword=blog" target="_blank"><button class="myButton">Blog</button></a></p>
+            <p><a href="/redirect.php?keyword=about" target="_blank"><button class="myButton">About</button></a></p>
+        <!--
+            <p style="text-align:center">lang:</p>
+            <p><a href="/"><button class="myButton">English</button></a></p>
+            <p><a href="/zh-cn"><button class="myButton">简体中文</button></a></p>
+        -->
+        </div>
+        <div id="content">
+            <h2 style="font-family:Comic Sans MS;text-align:center"><?php
+$titles = array(
+"The future belongs to those who believe in the beauty of their dreams.",
+"In the end,we only regret the chances we didn't take.",
+"Success is not final, failure is not fatal:It is the courage to continue that counts.",
+"The only way to do great work is to love what you do.",
+"Believe you can and you're halfway there."
+);
+$randomTitle = $titles[array_rand($titles)];
+echo $randomTitle;
+?>
+</h2>
+        <!--
+    <div id="video"><video width="1002" height="559" src="/data/video/the_social_dilemma.mp4" autoplay="false" muted controls></video></div>
+    <div style="text-align: center;font-size: small; font-weight: bold;">The social dilemma</p></div>
+    <p style="text-align:left"><?php $content = array(
+    "Cambridge dictionary<a target=\"_blank\" href=\"https://dictionary.cambridge.org\"><button class=\"myButton\">Click here</button></a>",
+    "Science kombat<a target=\"_blank\" href=\"science-kombat-mirror/\"><button class=\"myButton\">Play</button></a>",
+    "FreeBSD<a target=\"_blank\" href=\"https://www.freeBSD.org/\"><button class=\"myButton\">Click here</button></a>",
+    "Swisscows<a target=\"_blank\" href=\"https://swisscows.com/\"><button class=\"myButton\">Click here</button></a>",
+    "Nginx<a target=\"_blank\" href=\"https://nginx.org/\"><button class=\"myButton\">Click here</button></a>",
+    "RaspberryPi<a target=\"_blank\" href=\"https://www.raspberrypi.com/\"><button class=\"myButton\">Click here</button></a>"
+);
+shuffle($content);
+foreach ($content as $content) {
+    echo $content . "</p>\n\t<p style=\"text-align:left\">";
+}
+?></p>
+        -->
+
+                <!-- <h3 style="text-align:center">Develop Blog</h3> -->
+            <h3 style="text-align:left">Latest news</h3>
+            <p style="text-align:left">此网站服务器于2024年1月20日上线 <a target="_blank" href="./1"><button class="myButton">Click here</button></a></p>
+            <h3 style="text-align:left">Development Log</h3>
+            <h3 style="text-align:left">Personal Blog</h3>
+            <p style="text-align:left">简谈一下Anonymous network网站搭建 <a target="_blank" href="./1"><button class="myButton">Click here</button></a></p>
+        </div>
+    </div>
+    <div id="footer">
+        <p style="font-family:Comic Sans MS;text-align:center">Finished in Ubuntu 22.04.3 LTS</p>
+        <p style="font-family:Comic Sans MS;text-align:center">Copyright (c) 2023-2024 by hongyuan zhang,Liaoning jianzhu Vocational College,All Rights Reserved.</p>
+    </div>
+</body>
+</html>
